@@ -151,9 +151,13 @@ bindsym XF86MonBrightnessUp exec brightness+
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
 
+# Print Screen and Lightshot
+bindsym Print exec xdotool key --window $(xdotool search --limit 1 --all --pid $(pgrep Lightshot)) Print
+
 # Startup apps
 exec nm-applet # NetworkManager
 exec gtk-redshift # Redshift
 exec prime-indicator # prime-indicator
+exec wine /home/borna/opt/lightshot/Lightshot.exe
 exec firefox # Firefox
 exec i3-sensible-terminal # Terminal
