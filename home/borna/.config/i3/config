@@ -4,7 +4,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -73,11 +73,11 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
+bindsym $mod+1 workspace 1: web
+bindsym $mod+2 workspace 2: term
+bindsym $mod+3 workspace 3: dev
+bindsym $mod+4 workspace 4: files
+bindsym $mod+5 workspace 5: mail
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -85,11 +85,11 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+1 move container to workspace 1: web
+bindsym $mod+Shift+2 move container to workspace 2: term
+bindsym $mod+Shift+3 move container to workspace 3: dev
+bindsym $mod+Shift+4 move container to workspace 4: files
+bindsym $mod+Shift+5 move container to workspace 5: mail
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -100,27 +100,24 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+mode "exit" {
+        bindsym y exec "i3-msg exit"
+        bindsym n mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "exit";
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ccaron resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -140,7 +137,7 @@ bar {
 }
 
 # Lock
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec i3lock -c 000000
 
 # Brightness
 # https://github.com/jappeace/brightnessctl
@@ -158,6 +155,11 @@ bindsym Print exec xdotool key --window $(xdotool search --limit 1 --all --pid $
 exec nm-applet # NetworkManager
 exec gtk-redshift # Redshift
 exec prime-indicator # prime-indicator
-exec wine /home/borna/opt/lightshot/Lightshot.exe
-exec firefox # Firefox
-exec i3-sensible-terminal # Terminal
+exec wine /home/borna/opt/lightshot/Lightshot.exe # Lightshot
+
+exec i3-msg "workspace 3: dev; exec i3-sensible-terminal" # Terminal (dev)
+exec i3-msg "workspace 4: files; exec nautilus --no-desktop" # Nautilus
+exec i3-msg "workspace 2: term; exec i3-sensible-terminal" # Terminal
+
+exec ~/wait_for_internet.sh && i3-msg "workspace 1: web; exec firefox; workspace 2: term" # Firefox
+exec ~/wait_for_internet.sh && i3-msg "workspace 5: mail; exec thunderbird; workspace 2: term" # Thunderbird
