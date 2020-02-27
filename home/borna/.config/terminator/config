@@ -1,0 +1,31 @@
+[global_config]
+  enabled_plugins = ,
+  title_font = Monospace 8
+  title_transmit_bg_color = "#ececec"
+  title_transmit_fg_color = "#000000"
+  title_use_system_font = False
+  window_state = maximise
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    allow_bold = False
+    audible_bell = True
+    background_color = "#00212b"
+    background_darkness = 0.89
+    background_type = transparent
+    font = Monospace Bold 10
+    foreground_color = "#a7c6ca"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scroll_background = False
+    use_system_font = False
+    visible_bell = True
