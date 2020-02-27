@@ -22,5 +22,10 @@ set wildmenu
 set lazyredraw
 set showmatch
 
-colorscheme lucariox
+" Theme
+let g:solarized_termtrans=1
+set background=dark
+colorscheme solarized
 
+inoremap <C-J> <ESC>
+noremap <C-J> <ESC>
