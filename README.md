@@ -1,6 +1,7 @@
 ### Software
 - zsh: `sudo apt install zsh` & [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 - [i3](https://i3wm.org/) / [i3-gaps](https://github.com/Airblader/i3)
+- [py3status](https://github.com/ultrabug/py3status)
 - [Redshift](http://jonls.dk/redshift/): `sudo apt install redshift-gtk`
 - vim: `sudo apt install vim`  
 - Terminator: `sudo apt install terminator`
