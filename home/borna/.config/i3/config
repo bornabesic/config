@@ -170,6 +170,9 @@ bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
 # Print Screen and Lightshot
 bindsym Print exec xdotool key --window $(xdotool search --limit 1 --all --pid $(pgrep Lightshot)) Print
 
+# Set mouse sensitivity
+exec xinput list --id-only "Razer DeathAdder" | xargs -I {} xinput set-prop {} "Device Accel Constant Deceleration" 2.0
+
 # Startup apps
 exec nm-applet # NetworkManager
 exec blueman-applet # blueman
