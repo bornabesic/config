@@ -134,10 +134,29 @@ bar {
         # https://github.com/ultrabug/py3status
         status_command py3status
         tray_output primary
+
+        colors {
+            background #00212B
+            statusline #78bccc
+            separator #004454
+            focused_workspace  #4c7899 #004454 #ffffff
+            active_workspace  #4c7899 #004454 #ffffff
+            inactive_workspace  #00212B #00212B #78bccc
+        }
 }
 
 # Lock
 bindsym $mod+shift+x exec i3lock -c 000000
+
+# Set the wallpaper
+exec feh --bg-scale /home/borna/.config/stars.jpg
+
+# Remove title bars
+for_window [class=".*"] border pixel 0
+
+# i3-gaps
+gaps inner 10
+gaps outer 0
 
 # Brightness
 # https://github.com/jappeace/brightnessctl
@@ -153,6 +172,7 @@ bindsym Print exec xdotool key --window $(xdotool search --limit 1 --all --pid $
 
 # Startup apps
 exec nm-applet # NetworkManager
+exec blueman-applet # blueman
 exec gtk-redshift # Redshift
 exec prime-indicator # prime-indicator
 exec wine /home/borna/opt/lightshot/Lightshot.exe # Lightshot
